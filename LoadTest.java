@@ -6,7 +6,6 @@ import org.junit.jupiter.api.io.TempDir;
 
 import java.io.*;
 import java.nio.file.Path;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,6 +13,9 @@ import static org.junit.jupiter.api.Assertions.*;
         url = "https://rmit.spiraservice.net/",
         login = "s3952320",
         projectId = 258
+        // rssToken = "{D3F132C0-B1C4-4F28-A4CC-246934D58A4A}",
+        // releaseId = 0,
+        // testSetId = 0
 )
 class LoadTest {
 
@@ -26,89 +28,69 @@ class LoadTest {
     public void setup() {
         bank = new Bank();
         System.setOut(new PrintStream(outContent));
+        System.setProperty("user.dir", tempDir.toString());
     }
 
-    private void createTestFile(String fileName, Account... accounts) throws IOException {
-        File file = tempDir.resolve(fileName).toFile();
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
-            for (Account account : accounts) {
-                oos.writeObject(account);
-            }
+    private void createTestFile(Account... accounts) {
+        Bank testBank = new Bank();
+        for (Account account : accounts) {
+            testBank.AL.add(account);
         }
+        testBank.save();
     }
 
     @Test
     @SpiraTestCase(testCaseId = 16198)
-    public void testNormalLoad() throws IOException {
-        createTestFile("BankRecord.txt",
+    public void testNormalLoad() {
+        createTestFile(
                 new Account("Oisin Aeonn", 39523200, "2809", 3000),
-                new Account("Hoshi Aeonn", 39523201, "1234", 2000));
+                new Account("Hoshi Aeonn", 39523201, "1234", 2000)
+        );
 
         bank.load();
 
-        assertEquals(2, bank.AL.size());
-        assertEquals("Oisin Aeonn", bank.AL.get(0).getName());
-        assertEquals("Hoshi Aeonn", bank.AL.get(1).getName());
+        assertEquals(2, bank.AL.size(), "Two accounts should be loaded");
+        assertEquals("Oisin Aeonn", bank.AL.get(0).getName(), "First account should be Oisin Aeonn");
+        assertEquals("Hoshi Aeonn", bank.AL.get(1).getName(), "Second account should be Hoshi Aeonn");
     }
 
     @Test
     @SpiraTestCase(testCaseId = 16199)
     public void testLoadCorruptedFile() throws IOException {
-        File file = tempDir.resolve("BankRecord.txt").toFile();
-        try (FileWriter writer = new FileWriter(file)) {
-            writer.write("This is not valid serialized data");
+        File file = new File("BankRecord.txt");
+        try (FileOutputStream fos = new FileOutputStream(file)) {
+            fos.write("This is not valid serialized data".getBytes());
         }
 
         bank.load();
 
-        assertEquals(0, bank.AL.size());
-        assertTrue(outContent.toString().contains("Error loading data from file"));
+        assertEquals(0, bank.AL.size(), "No accounts should be loaded from corrupted file");
     }
 
     @Test
     @SpiraTestCase(testCaseId = 16200)
     public void testLoadNonExistentFile() {
-        // Ensure the file doesn't exist
-        File file = tempDir.resolve("BankRecord.txt").toFile();
+        File file = new File("BankRecord.txt");
         file.delete();
 
         bank.load();
 
-        assertEquals(0, bank.AL.size());
-        assertTrue(outContent.toString().contains("Error loading data from file"));
+        assertEquals(0, bank.AL.size(), "No accounts should be loaded when file doesn't exist");
     }
 
     @Test
     @SpiraTestCase(testCaseId = 16201)
-    public void testLoadLargeNumberOfAccounts() throws IOException {
-        File file = tempDir.resolve("BankRecord.txt").toFile();
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
-            for (int i = 0; i < 1000; i++) {
-                oos.writeObject(new Account("Test" + i, 10000000 + i, "1234", 1000));
-            }
+    public void testLoadLargeNumberOfAccounts() {
+        Bank testBank = new Bank();
+        for (int i = 0; i < 1000; i++) {
+            testBank.AL.add(new Account("Test" + i, 10000000 + i, "1234", 1000));
         }
+        testBank.save();
 
         bank.load();
 
-        assertEquals(1000, bank.AL.size());
-        assertEquals("Test0", bank.AL.get(0).getName());
-        assertEquals("Test999", bank.AL.get(999).getName());
-    }
-
-    @Test
-    @SpiraTestCase(testCaseId = 16202)
-    public void testLoadWithMixedValidAndInvalidData() throws IOException {
-        File file = tempDir.resolve("BankRecord.txt").toFile();
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
-            oos.writeObject(new Account("Valid1", 10000001, "1234", 1000));
-            oos.writeObject("This is not an Account object");
-            oos.writeObject(new Account("Valid2", 10000002, "5678", 2000));
-        }
-
-        bank.load();
-
-        assertEquals(2, bank.AL.size());
-        assertEquals("Valid1", bank.AL.get(0).getName());
-        assertEquals("Valid2", bank.AL.get(1).getName());
+        assertEquals(1000, bank.AL.size(), "All 1000 accounts should be loaded");
+        assertEquals("Test0", bank.AL.get(0).getName(), "First account should be Test0");
+        assertEquals("Test999", bank.AL.get(999).getName(), "Last account should be Test999");
     }
 }

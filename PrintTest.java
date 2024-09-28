@@ -12,6 +12,9 @@ import static org.junit.jupiter.api.Assertions.*;
         url = "https://rmit.spiraservice.net/",
         login = "s3952320",
         projectId = 258
+        // rssToken = "{D3F132C0-B1C4-4F28-A4CC-246934D58A4A}",
+        // releaseId = 0,
+        // testSetId = 0
 )
 class PrintTest {
 
