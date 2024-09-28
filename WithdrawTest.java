@@ -12,10 +12,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpiraTestConfiguration(
         url = "https://rmit.spiraservice.net/",
         login = "s3952320",
-        projectId = 258
-        // rssToken = "{D3F132C0-B1C4-4F28-A4CC-246934D58A4A}",
-        // releaseId = 0,
-        // testSetId = 0
+        projectId = 258,
+        rssToken = "{332767F9-C19C-42B0-BE3C-3EC80E04AC56}",
+        releaseId = 1453,
+        testSetId = 2513
 )
 class WithdrawTest {
 
@@ -35,7 +35,7 @@ class WithdrawTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16185)
+    @SpiraTestCase(testCaseId = 16231)
     public void testWithdrawMenuPrompts() {
         simulateInput("39523200\n2809\n1000\n");
         bank.withdraw();
@@ -49,7 +49,7 @@ class WithdrawTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16186)
+    @SpiraTestCase(testCaseId = 16232)
     public void testNormalWithdraw() {
         simulateInput("39523200\n2809\n1000\n");
         bank.withdraw();
@@ -58,7 +58,7 @@ class WithdrawTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16187)
+    @SpiraTestCase(testCaseId = 16233)
     public void testWithdrawInvalidAccount() {
         simulateInput("12345678\n2809\n1000\n");
         bank.withdraw();
@@ -67,7 +67,7 @@ class WithdrawTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16188)
+    @SpiraTestCase(testCaseId = 16234)
     public void testWithdrawInvalidPIN() {
         simulateInput("39523200\n1111\n1000\n");
         bank.withdraw();
@@ -76,7 +76,7 @@ class WithdrawTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16189)
+    @SpiraTestCase(testCaseId = 16235)
     public void testWithdrawInsufficientFunds() {
         simulateInput("39523200\n2809\n5000\n");
         bank.withdraw();
@@ -86,7 +86,7 @@ class WithdrawTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16190)
+    @SpiraTestCase(testCaseId = 16236)
     public void testWithdrawNegativeAmount() {
         simulateInput("39523200\n2809\n-1000\n");
         bank.withdraw();
@@ -95,7 +95,7 @@ class WithdrawTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16191)
+    @SpiraTestCase(testCaseId = 16237)
     public void testWithdrawZeroAmount() {
         simulateInput("39523200\n2809\n0\n");
         bank.withdraw();
@@ -104,7 +104,7 @@ class WithdrawTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16192)
+    @SpiraTestCase(testCaseId = 16238)
     public void testWithdrawEntireBalance() {
         simulateInput("39523200\n2809\n4000\n");
         bank.withdraw();

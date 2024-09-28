@@ -12,10 +12,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpiraTestConfiguration(
         url = "https://rmit.spiraservice.net/",
         login = "s3952320",
-        projectId = 258
-        // rssToken = "{D3F132C0-B1C4-4F28-A4CC-246934D58A4A}",
-        // releaseId = 0,
-        // testSetId = 0
+        projectId = 258,
+        rssToken = "{332767F9-C19C-42B0-BE3C-3EC80E04AC56}",
+        releaseId = 1453,
+        testSetId = 2509
 )
 class LoadTest {
 
@@ -40,7 +40,7 @@ class LoadTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16198)
+    @SpiraTestCase(testCaseId = 16243)
     public void testNormalLoad() {
         createTestFile(
                 new Account("Oisin Aeonn", 39523200, "2809", 3000),
@@ -55,7 +55,7 @@ class LoadTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16199)
+    @SpiraTestCase(testCaseId = 16244)
     public void testLoadCorruptedFile() throws IOException {
         File file = new File("BankRecord.txt");
         try (FileOutputStream fos = new FileOutputStream(file)) {
@@ -68,7 +68,7 @@ class LoadTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16200)
+    @SpiraTestCase(testCaseId = 16245)
     public void testLoadNonExistentFile() {
         File file = new File("BankRecord.txt");
         file.delete();
@@ -79,7 +79,7 @@ class LoadTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16201)
+    @SpiraTestCase(testCaseId = 16246)
     public void testLoadLargeNumberOfAccounts() {
         Bank testBank = new Bank();
         for (int i = 0; i < 1000; i++) {

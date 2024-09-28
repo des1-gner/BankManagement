@@ -11,10 +11,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpiraTestConfiguration(
         url = "https://rmit.spiraservice.net/",
         login = "s3952320",
-        projectId = 258
-        // rssToken = "{D3F132C0-B1C4-4F28-A4CC-246934D58A4A}",
-        // releaseId = 0,
-        // testSetId = 0
+        projectId = 258,
+        rssToken = "{332767F9-C19C-42B0-BE3C-3EC80E04AC56}",
+        releaseId = 1453,
+        testSetId = 2510
 )
 class PrintTest {
 
@@ -35,7 +35,7 @@ class PrintTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16193)
+    @SpiraTestCase(testCaseId = 16239)
     public void testPrintAllComponents() {
         bank.print();
         String output = outContent.toString();
@@ -53,7 +53,7 @@ class PrintTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16194)
+    @SpiraTestCase(testCaseId = 16240)
     public void testPrintOrder() {
         bank.print();
         String output = outContent.toString().trim(); // Trim to remove leading/trailing whitespaces
@@ -64,7 +64,7 @@ class PrintTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16195)
+    @SpiraTestCase(testCaseId = 16241)
     public void testPrintFormat() {
         bank.print();
         String output = outContent.toString();
@@ -80,7 +80,7 @@ class PrintTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16196)
+    @SpiraTestCase(testCaseId = 16242)
     public void testPrintEmptyBank() {
         bank.AL.clear();
         bank.print();

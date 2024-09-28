@@ -12,10 +12,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpiraTestConfiguration(
         url = "https://rmit.spiraservice.net/",
         login = "s3952320",
-        projectId = 258
-        // rssToken = "{D3F132C0-B1C4-4F28-A4CC-246934D58A4A}",
-        // releaseId = 0,
-        // testSetId = 0
+        projectId = 258,
+        rssToken = "{332767F9-C19C-42B0-BE3C-3EC80E04AC56}",
+        releaseId = 1453,
+        testSetId = 2511
 )
 class SaveTest {
 
@@ -32,7 +32,7 @@ class SaveTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16203)
+    @SpiraTestCase(testCaseId = 16248)
     public void testSaveNormalCase() {
         bank.AL.add(new Account("Oisin Aeonn", 39523200, "2809", 3000));
         bank.AL.add(new Account("Hoshi Aeonn", 39523201, "1234", 2000));
@@ -48,7 +48,7 @@ class SaveTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16204)
+    @SpiraTestCase(testCaseId = 16249)
     public void testSaveEmptyBank() {
         bank.save();
 
@@ -59,7 +59,7 @@ class SaveTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16205)
+    @SpiraTestCase(testCaseId = 16250)
     public void testSaveLargeNumberOfAccounts() {
         for (int i = 0; i < 1000; i++) {
             bank.AL.add(new Account("Test" + i, 10000000 + i, "1234", 1000));
@@ -76,7 +76,7 @@ class SaveTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16206)
+    @SpiraTestCase(testCaseId = 16251)
     public void testSaveWithSpecialCharacters() {
         bank.AL.add(new Account("Oisin O'Aeonn", 39523200, "2809", 3000));
         bank.AL.add(new Account("Elani Shannon-Puszka", 41082220, "5678", 1500));
@@ -92,7 +92,7 @@ class SaveTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16207)
+    @SpiraTestCase(testCaseId = 16252)
     public void testSaveAndOverwrite() {
         bank.AL.add(new Account("Oisin Aeonn", 39523200, "2809", 3000));
         bank.save();

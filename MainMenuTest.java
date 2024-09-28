@@ -11,18 +11,18 @@ import com.inflectra.spiratest.addons.junitextension.SpiraTestConfiguration;
 @SpiraTestConfiguration(
         url = "https://rmit.spiraservice.net/",
         login = "s3952320",
-        projectId = 258
-        // rssToken = "{D3F132C0-B1C4-4F28-A4CC-246934D58A4A}",
-        // releaseId = 0,
-        // testSetId = 0
+        projectId = 258,
+        rssToken = "{332767F9-C19C-42B0-BE3C-3EC80E04AC56}",
+        releaseId = 1453,
+        testSetId = 2526
 )
-class MainMenuTest {
+public class MainMenuTest {
     private Bank bank;
     private StringWriter stringWriter;
     private PrintWriter printWriter;
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         bank = new Bank();
         stringWriter = new StringWriter();
         printWriter = new PrintWriter(stringWriter);
@@ -35,8 +35,8 @@ class MainMenuTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16209)
-    void testMenuDisplay() {
+    @SpiraTestCase(testCaseId = 16254)
+    public void testMenuDisplay() {
         String output = runMenu("5\n");
         assertAll(
                 () -> assertTrue(output.contains("welcome to our bank"), "Welcome message not found"),
@@ -49,36 +49,36 @@ class MainMenuTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16210)
-    void testCreateAccountOption() {
+    @SpiraTestCase(testCaseId = 16255)
+    public void testCreateAccountOption() {
         String output = runMenu("1\nTestUser\n12345678\n1234\n0\n5\n");
         assertTrue(output.contains("enter name of account holder"), "Create account prompt not found");
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16211)
-    void testTransferOption() {
+    @SpiraTestCase(testCaseId = 16256)
+    public void testTransferOption() {
         String output = runMenu("2\n5\n");
         assertTrue(output.contains("enter sender's 8 digit account number"), "Transfer prompt not found");
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16212)
-    void testWithdrawOption() {
+    @SpiraTestCase(testCaseId = 16257)
+    public void testWithdrawOption() {
         String output = runMenu("3\n5\n");
         assertTrue(output.contains("enter user's 8 digit account number"), "Withdraw prompt not found");
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16213)
-    void testExitOption() {
+    @SpiraTestCase(testCaseId = 16258)
+    public void testExitOption() {
         String output = runMenu("5\n");
         assertTrue(output.contains("data saved to file \"bankrecord.txt\""), "Exit message not found");
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16214)
-    void testInvalidInput() {
+    @SpiraTestCase(testCaseId = 16259)
+    public void testInvalidInput() {
         String output = runMenu("6\n5\n");
         assertTrue(output.contains("wrong input"), "Invalid input message not found");
     }

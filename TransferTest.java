@@ -12,10 +12,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpiraTestConfiguration(
         url = "https://rmit.spiraservice.net/",
         login = "s3952320",
-        projectId = 258
-        // rssToken = "{D3F132C0-B1C4-4F28-A4CC-246934D58A4A}",
-        // releaseId = 0,
-        // testSetId = 0
+        projectId = 258,
+        rssToken = "{332767F9-C19C-42B0-BE3C-3EC80E04AC56}",
+        releaseId = 1453,
+        testSetId = 2512
 )
 class TransferTest {
 
@@ -36,7 +36,7 @@ class TransferTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16176)
+    @SpiraTestCase(testCaseId = 16221)
     public void testTransferMenuPrompts() {
         simulateInput("39523200\n2809\n39523201\n1000\n");
         bank.transfer();
@@ -51,7 +51,7 @@ class TransferTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16177)
+    @SpiraTestCase(testCaseId = 16222)
     public void testNormalTransfer() {
         simulateInput("39523200\n2809\n39523201\n1000\n");
         bank.transfer();
@@ -63,7 +63,7 @@ class TransferTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16178)
+    @SpiraTestCase(testCaseId = 16223)
     public void testTransferInvalidSenderAccount() {
         simulateInput("12345678\n2809\n39523201\n1000\n");
         bank.transfer();
@@ -72,7 +72,7 @@ class TransferTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16179)
+    @SpiraTestCase(testCaseId = 16224)
     public void testTransferInvalidReceiverAccount() {
         simulateInput("39523200\n2809\n12345678\n1000\n");
         bank.transfer();
@@ -81,7 +81,7 @@ class TransferTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16180)
+    @SpiraTestCase(testCaseId = 16225)
     public void testTransferInvalidPIN() {
         simulateInput("39523200\n1111\n39523201\n1000\n");
         bank.transfer();
@@ -90,7 +90,7 @@ class TransferTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16181)
+    @SpiraTestCase(testCaseId = 16226)
     public void testTransferInsufficientFunds() {
         simulateInput("39523200\n2809\n39523201\n5000\n");
         bank.transfer();
@@ -99,7 +99,7 @@ class TransferTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16182)
+    @SpiraTestCase(testCaseId = 16227)
     public void testTransferNegativeAmount() {
         simulateInput("39523200\n2809\n39523201\n-1000\n");
         bank.transfer();
@@ -108,7 +108,7 @@ class TransferTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16183)
+    @SpiraTestCase(testCaseId = 16228)
     public void testTransferToSameAccount() {
         simulateInput("39523200\n2809\n39523200\n1000\n");
         bank.transfer();
@@ -117,7 +117,7 @@ class TransferTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16184)
+    @SpiraTestCase(testCaseId = 16229)
     public void testTransferZeroAmount() {
         simulateInput("39523200\n2809\n39523201\n0\n");
         bank.transfer();

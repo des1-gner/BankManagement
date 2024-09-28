@@ -14,10 +14,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpiraTestConfiguration(
         url = "https://rmit.spiraservice.net/",
         login = "s3952320",
-        projectId = 258
-        // rssToken = "{D3F132C0-B1C4-4F28-A4CC-246934D58A4A}",
-        // releaseId = 0,
-        // testSetId = 0
+        projectId = 258,
+        rssToken = "{332767F9-C19C-42B0-BE3C-3EC80E04AC56}",
+        releaseId = 1453,
+        testSetId = 2508
 )
 class AddNewRecordTest {
 
@@ -35,7 +35,7 @@ class AddNewRecordTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16175)
+    @SpiraTestCase(testCaseId = 16204)
     public void testAddNewRecordPrompts() {
         simulateInput("Oisin Aeonn\n39523200\n2809\n2024\n");
         bank.addNewRecord();
@@ -71,7 +71,7 @@ class AddNewRecordTest {
 
     // Name tests
     @Test
-    @SpiraTestCase(testCaseId = 16158)
+    @SpiraTestCase(testCaseId = 16205)
     public void testAddNewRecordNameWithSpecialCharacters() {
         simulateInput("Oisin $%# Aeonn\n39523200\n2809\n2024\n");
         bank.addNewRecord();
@@ -81,7 +81,7 @@ class AddNewRecordTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16159)
+    @SpiraTestCase(testCaseId = 16206)
     public void testAddNewRecordEmptyName() {
         simulateInput("\n39523200\n2809\n2024\n");
         bank.addNewRecord();
@@ -92,7 +92,7 @@ class AddNewRecordTest {
 
     // Account number tests
     @Test
-    @SpiraTestCase(testCaseId = 16156)
+    @SpiraTestCase(testCaseId = 16207)
     public void testAddNewRecordInvalidAccountNumber() {
         simulateInput("Oisin Aeonn\n3952320\n2809\n2024\n");
         bank.addNewRecord();
@@ -102,7 +102,7 @@ class AddNewRecordTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16157)
+    @SpiraTestCase(testCaseId = 16208)
     public void testAddNewRecordDuplicateRecord() {
         simulateInput("Oisin Aeonn\n39523200\n2809\n2024\n");
         bank.addNewRecord();
@@ -114,7 +114,7 @@ class AddNewRecordTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16163)
+    @SpiraTestCase(testCaseId = 16209)
     public void testAddNewRecordNonNumericAccountNumber() {
         simulateInput("Oisin Aeonn\ns3952320\n2809\n2024\n");
 
@@ -123,7 +123,7 @@ class AddNewRecordTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16164)
+    @SpiraTestCase(testCaseId = 16210)
     public void testAddNewRecordNegativeAccountNumber() {
         simulateInput("Oisin Aeonn\n-39523200\n2809\n2024\n");
         bank.addNewRecord();
@@ -133,7 +133,7 @@ class AddNewRecordTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16165)
+    @SpiraTestCase(testCaseId = 16211)
     public void testAddNewRecordZeroAccountNumber() {
         simulateInput("Oisin Aeonn\n00000000\n2809\n2024\n");
         bank.addNewRecord();
@@ -143,7 +143,7 @@ class AddNewRecordTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16166)
+    @SpiraTestCase(testCaseId = 16212)
     public void testAddNewRecordEmptyAccountNumber() {
         simulateInput("Oisin Aeonn\n\n2809\n2024\n");
 
@@ -152,7 +152,7 @@ class AddNewRecordTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16174)
+    @SpiraTestCase(testCaseId = 16213)
     public void testAddNewRecordDecimalAccountNumber() {
         simulateInput("Oisin Aeonn\n3952320.5\n2809\n2024\n");
 
@@ -162,7 +162,7 @@ class AddNewRecordTest {
 
     // PIN tests
     @Test
-    @SpiraTestCase(testCaseId = 16167)
+    @SpiraTestCase(testCaseId = 16214)
     public void testAddNewRecordPINWithLetters() {
         simulateInput("Oisin Aeonn\n39523200\n28a9\n2024\n");
         bank.addNewRecord();
@@ -173,7 +173,7 @@ class AddNewRecordTest {
 
     // Amount tests
     @Test
-    @SpiraTestCase(testCaseId = 16154)
+    @SpiraTestCase(testCaseId = 16215)
     public void testAddNewRecordZeroAdditionalAmount() {
         simulateInput("Oisin Aeonn\n39523200\n2809\n0\n");
         bank.addNewRecord();
@@ -182,7 +182,7 @@ class AddNewRecordTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16155)
+    @SpiraTestCase(testCaseId = 16216)
     public void testAddNewRecordNegativeAmountNoError() {
         simulateInput("Oisin Aeonn\n39523200\n2809\n-2024\n");
         bank.addNewRecord();
@@ -192,7 +192,7 @@ class AddNewRecordTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16170)
+    @SpiraTestCase(testCaseId = 16217)
     public void testAddNewRecordEmptyAmount() {
         simulateInput("Oisin Aeonn\n39523200\n2809\n\n");
 
@@ -201,7 +201,7 @@ class AddNewRecordTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16171)
+    @SpiraTestCase(testCaseId = 16218)
     public void testAddNewRecordWithHugeAmount() {
         simulateInput("Oisin Aeonn\n39523200\n2809\n1.8e308\n");
         bank.addNewRecord();
@@ -211,7 +211,7 @@ class AddNewRecordTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16172)
+    @SpiraTestCase(testCaseId = 16219)
     public void testAddNewRecordAmountWithCharacters() {
         simulateInput("Oisin Aeonn\n39523211\n2809\n2024a\n");
 
@@ -220,7 +220,7 @@ class AddNewRecordTest {
     }
 
     @Test
-    @SpiraTestCase(testCaseId = 16173)
+    @SpiraTestCase(testCaseId = 16220)
     public void testAddNewRecordAmountWithDecimalCharacters() {
         simulateInput("Oisin Aeonn\n39523212\n2809\n2024.50\n");
         bank.addNewRecord();
