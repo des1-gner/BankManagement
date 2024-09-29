@@ -14,8 +14,8 @@ import static org.junit.jupiter.api.Assertions.*;
         login = "s3952320",
         projectId = 258,
         rssToken = "{332767F9-C19C-42B0-BE3C-3EC80E04AC56}",
-        releaseId = 1453,
-        testSetId = 2511
+        releaseId = 1467//,
+        // testSetId = 2511
 )
 class SaveTest {
 
